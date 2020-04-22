@@ -6,7 +6,7 @@ jobs:
       - checkout
       - run:
           name: create google service account file
-          command: ./scripts/create-google-service-account.sh
+          command: ./scripts/create-google-service-account-file.sh
       - run:
           name: install cf cli
           command: |
