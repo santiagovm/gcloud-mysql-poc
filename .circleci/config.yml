@@ -1,0 +1,30 @@
+jobs:
+  build:
+    docker:
+      - image: circleci/openjdk:11-jdk-stretch
+    steps:
+      - checkout
+      - run:
+          name: create google service account file
+          command: ./scripts/create-google-service-account.sh
+      - run:
+          name: install cf cli
+          command: |
+            curl -v -L -o cf-cli_amd64.deb 'https://cli.run.pivotal.io/stable?release=debian64&source=github'
+            sudo dpkg -i cf-cli_amd64.deb
+            cf -v
+      - run:
+          name: setup cf cli
+          command: |
+            cf api "https://api.run.pivotal.io"
+            cf auth "$CF_USERNAME" "$CF_PASSWORD"
+            cf target -o "$CF_ORG" -s "$CF_SPACE"
+      - run:
+          name: build and deploy
+          command: ./scripts/deploy.sh
+
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - build
