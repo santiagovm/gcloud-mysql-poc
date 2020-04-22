@@ -8,7 +8,6 @@ public class GcloudMysqlPocApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(GcloudMysqlPocApplication.class, args);
-
 	}
 
 }
