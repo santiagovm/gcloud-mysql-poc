@@ -13,9 +13,15 @@ function go_to_root_directory() {
 }
 
 function replace_env_vars_in_template_and_copy_to_java_resources() {
+  fix_multiline_env_bars
   template=scripts/google-cloud-service-account-template.json
   java_resource_file=src/main/resources/google-cloud-service-account.json
   envsubst < $template > $java_resource_file
+}
+
+function fix_multiline_env_bars() {
+  key=$(echo "$GC_SVC_ACCT_PRIVATE_KEY_BASE64" | base64 --decode)
+  export GC_SVC_ACCT_PRIVATE_KEY=$key
 }
 
 function main() {
