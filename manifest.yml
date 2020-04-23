@@ -11,4 +11,4 @@ applications:
       DB_URL: ((db-url))
       DB_USER: ((db-user))
       DB_PASSWORD: ((db-password))
-      GOOGLE_APPLICATION_CREDENTIALS: /home/vcap/app/BOOT-INF/classes/google-test-mysql-public-4b236c20d02e.json
+      GOOGLE_APPLICATION_CREDENTIALS: /home/vcap/app/BOOT-INF/classes/google-cloud-service-account.json

@@ -5,10 +5,15 @@ jobs:
     steps:
       - checkout
       - run:
+          name: install envsubst
+          command: |
+            sudo apt-get update
+            sudo apt-get -y install gettext-base
+      - run:
           name: create google service account file
           command: ./scripts/create-google-service-account-file.sh
       - run:
-          name: install cf cli
+          name: install cf-cli
           command: |
             curl -v -L -o cf-cli_amd64.deb 'https://cli.run.pivotal.io/stable?release=debian64&source=github'
             sudo dpkg -i cf-cli_amd64.deb
