@@ -15,7 +15,7 @@ followed by a query returning all records.
 
 These variables hold credentials to access Pivotal Web Services. They are used when setting up cf cli
 
-```
+```shell script
 cf auth "$CF_USERNAME" "$CF_PASSWORD"
 cf target -o "$CF_ORG" -s "$CF_SPACE"
 ```
@@ -46,7 +46,7 @@ Base64-encode property `private_key` from Google Service Account json file. This
 new lines `\n` that cause problems in the CI/CD pipeline. Encoding this value in base64 works around 
 these problems. To calculate encoded value use command below.
 
-```
+```shell script
 echo private_key | base64
 ```
 
@@ -65,7 +65,19 @@ For a Spring application, an easy way to connect is by using [Google's Cloud SQL
 
 Gradle Configuration:
 
-```
+```groovy
 runtimeOnly 'mysql:mysql-connector-java:8.0.19'
 runtimeOnly 'com.google.cloud.sql:mysql-socket-factory-connector-j-8:1.0.15'
 ```
+
+## Other Dependencies
+
+To run the deployment script locally you will need to install `envsubst`
+
+```shell script
+curl -L https://github.com/a8m/envsubst/releases/download/v1.1.0/envsubst-`uname -s`-`uname -m` -o envsubst
+chmod +x envsubst
+sudo mv envsubst /usr/local/bin
+```
+
+more details [here](https://github.com/a8m/envsubst)
